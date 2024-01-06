@@ -1,7 +1,25 @@
 ## clone from https://github.com/OpenTalker/SadTalker  
-## resolved some errors when install and running
+
+### For MacOS M1
+
+This method has been tested on a M1 MacbookPro (OS Sonoma 14.2, 32G Memery, 10CPU, 8GPU)
+
+```bash
+git clone https://github.com/jelly-liu/SadTalker4M1.git
+cd SadTalker 
+conda create -n sadtalker python=3.8
+conda activate sadtalker
+# install pytorch 2.0
+pip install torch torchvision torchaudio
+conda install ffmpeg
+conda install numba
+pip install -r requirements.txt
+pip install dlib # macOS needs to install the original dlib.
+```
+
+### belows is some errors when install and running, for reference:
 1. brew always download json file ... formula.jws.json, and very slow  
-	try1 ok: ```bash export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api  ```
+	try1 ok: ```bash export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api  ```  
 	try2 ok: ```bash export HOMEBREW_NO_INSTALL_FROM_API=1```  
   recommand try1  
 3. ImportError: Numba could not be imported  
@@ -14,15 +32,15 @@ here is the file: [app_sadtalker.zip](https://objects.githubusercontent.com/gith
 	try no: ```bash use admin to run web-ui.sh ```  
 	try ok: ```bash conda install ffmpeg ```  
 6. pip install TTS, error about sklearn:  
-   because python3.8 conflict with scikit-learn, scikit-learn official site recommand python3.9.
-   under python 3.9, pip install TTS did success!!, but SadTalker need python3.8.
-   so, i comment the pip intall TTS in source code, because you can use other AI-Voice to generate TTS voice.
+   because python3.8 conflict with scikit-learn, scikit-learn official site recommand python3.9.  
+   under python 3.9, pip install TTS did success!!, but SadTalker need python3.8.  
+   so, i commented the pip intall TTS in source code, you can use other AI-Voice to generate TTS voice.
    ```python
    launcher.py, line 191 and 192:
     # if sys.platform != 'win32' and not is_installed('tts'):
     #   run_pip(f"install TTS", "install TTS individually in SadTalker, which might not work on windows.")
    ```
-7. ffmpeg error: Invalid argument, file in same place:
+8. ffmpeg error: Invalid argument, file in same place:
    Output results/8141d6d3-a2fa-4da5-9cfd-4f74b1eb6648/cute_little_girl##hello_full.mp4 same as Input #0 - exiting  
 	 FFmpeg cannot edit existing files in-place.  
 	 Error opening output file results/8141d6d3-a2fa-4da5-9cfd-4f74b1eb6648/cute_little_girl##hello_full.mp4.  
@@ -31,11 +49,12 @@ here is the file: [app_sadtalker.zip](https://objects.githubusercontent.com/gith
    So: do not care it, video already generated.
 99. Finally, Enjoy!!
 
-## here my test resault, it takes 30 minutes, very slow:
+## here my test resault:
 My Env: Macbook Pro M1, Sonoma 14.2.1, 32G memery, 10CPU(8+2), 8GPU.  
 input 4 seconds voice.m4a, out 256*256 size video.  
-CPU average usage about 30%.  
-GPU average usage about 10%, it seems not use GPU.  
-Memery average usage about 20G.  
-Very Very Slow.  
+it takes 30 minutes, very slow.  
+CPU average usage 30%.  
+GPU average usage 10%, it seems not use GPU.  
+Memery average usage 20G.  
+Very Very Very Slow.  
    
