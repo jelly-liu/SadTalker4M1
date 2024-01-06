@@ -188,8 +188,8 @@ def prepare_environment():
 
     run_pip(f"install -r \"{requirements_file}\"", "requirements for SadTalker WebUI (may take longer time in first time)")
 
-    if sys.platform != 'win32' and not is_installed('tts'):
-        run_pip(f"install TTS", "install TTS individually in SadTalker, which might not work on windows.")
+    # if sys.platform != 'win32' and not is_installed('tts'):
+    #     run_pip(f"install TTS", "install TTS individually in SadTalker, which might not work on windows.")
 
 
 def start():
